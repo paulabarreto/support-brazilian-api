@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 // Import contact model
 Business = require('../Model/brazilianBusinessModel');
 // Handle index actions
@@ -19,14 +21,18 @@ exports.index = function (req, res) {
 // Handle create contact actions
 exports.new = function (req, res) {
     var business = new Business();
+    business.image.data = fs.readFileSync('./sb.png');
+    business.image.contentType = 'image/png';
     business.name = req.body.name ? req.body.name : business.name;
     business.website = req.body.website;
     business.instagram = req.body.instagram;
     business.address = req.body.address;
 // save the business and check for errors
     business.save(function (err) {
-        // if (err)
-        //     res.json(err);
+        if (err) {
+            res.json(err);
+            return
+        }
 res.json({
             message: 'New business created!',
             data: business
@@ -68,9 +74,11 @@ business.name = req.body.name ? req.body.name : business.name;
 exports.delete = function (req, res) {
     Business.remove({
         _id: req.params.business_id
-    }, function (err, business) {
-        if (err)
+    }, function (err) {
+        if (err) {
             res.send(err);
+            return
+        }
 res.json({
             status: "success",
             message: 'business deleted'

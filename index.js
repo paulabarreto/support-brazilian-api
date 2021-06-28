@@ -1,3 +1,6 @@
+var fs = require('fs');
+var cors = require('cors')
+
 // Import express
 let express = require('express');
 // Import Body parser
@@ -9,6 +12,8 @@ let app = express();
 
 // Import routes
 let apiRoutes = require("./api-routes");
+app.use(cors());
+
 // Configure bodyparser to handle post requests
 app.use(bodyParser.urlencoded({
     extended: true
