@@ -1,7 +1,10 @@
 var mongoose = require('mongoose');
 // Setup schema
 var businessSchema = mongoose.Schema({
-    image: { data: Buffer, contentType: String },
+    image: { 
+        data: Buffer, 
+        contentType: String
+    },
     name: {
         type: String,
         required: true
@@ -9,6 +12,7 @@ var businessSchema = mongoose.Schema({
     website: String,
     instagram: String,
     address: String,
+    adminAprroved: false,
     create_date: {
         type: Date,
         default: Date.now

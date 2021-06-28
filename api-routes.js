@@ -13,10 +13,11 @@ const brazilianBusinessController = require('./Controllers/brazilianBusinessCont
 router.route('/brazilianBusiness')
     .get(brazilianBusinessController.index)
     .post(brazilianBusinessController.new);
-router.route('/brazilianBusiness/:business_id')
+router.route('/brazilianBusiness')
     // .get(brazilianBusinessController.view)
     // .patch(brazilianBusinessController.update)
     // .put(brazilianBusinessController.update)
-    .delete(brazilianBusinessController.delete);
+    // .delete(brazilianBusinessController.delete);
+    .delete(brazilianBusinessController.deleteAll);
 // Export API routes
 module.exports = router;

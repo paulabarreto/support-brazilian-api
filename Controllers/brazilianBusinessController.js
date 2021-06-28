@@ -85,3 +85,15 @@ res.json({
         });
     });
 };
+exports.deleteAll = function (req, res) {
+    Business.remove(function (err) {
+        if (err) {
+            res.send(err);
+            return
+        }
+res.json({
+            status: "success",
+            message: 'business deleted'
+        });
+    });
+};
