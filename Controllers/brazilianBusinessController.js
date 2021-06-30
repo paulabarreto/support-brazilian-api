@@ -21,7 +21,10 @@ exports.index = function (req, res) {
 // Handle create contact actions
 exports.new = function (req, res) {
     var business = new Business();
-    business.image.data = fs.readFileSync('./sb.png');
+    // business.image.data = fs.readFileSync(req.file);
+    business.image.data = req.file;
+    console.log("🚀 ~ file: brazilianBusinessController.js ~ line 26 ~ req.file", typeof req.file)
+    
     business.image.contentType = 'image/png';
     business.name = req.body.name ? req.body.name : business.name;
     business.website = req.body.website;
@@ -55,7 +58,7 @@ exports.update = function (req, res) {
 Business.findById(req.params.business_id, function (err, business) {
         if (err)
             res.send(err);
-business.name = req.body.name ? req.body.name : business.name;
+        business.name = req.body.name ? req.body.name : business.name;
         business.website = req.body.website;
         business.instagram = req.body.instagram;
         business.address = req.body.address;

@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 // Setup schema
 var businessSchema = mongoose.Schema({
-    image: { 
-        data: Buffer, 
+    image: {
+        data: Buffer,
         contentType: String
     },
     name: {

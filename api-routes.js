@@ -1,5 +1,49 @@
+var fs = require('fs');
+
 // Initialize express router
 let router = require('express').Router();
+Business = require('./Model/brazilianBusinessModel');
+
+const path = require("path");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+    destination: "./public/uploads/",
+    filename: function(req, file, cb){
+       cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
+    }
+ });
+ 
+ const upload = multer({
+    storage: storage,
+    limits:{fileSize: 1000000},
+ }).single("image");
+
+router.post('/newBusiness', function (req, res) {
+    upload(req, res, function (err) {
+        var business = new Business();
+        // business.image.data = fs.readFileSync(req.file);
+        business.image = {
+            data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+        business.name = req.body.name;
+        business.website = req.body.website;
+        business.instagram = req.body.instagram;
+        business.address = req.body.address;
+        business.save(function (err) {
+            if (err) {
+                res.json(err);
+                return
+            }
+        res.json({
+                message: 'New business created!',
+                data: business
+            });
+        });
+    })
+})
+
 // Set default API response
 router.get('/', function (req, res) {
     res.json({
