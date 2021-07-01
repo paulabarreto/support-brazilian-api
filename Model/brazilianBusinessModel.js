@@ -12,6 +12,7 @@ var businessSchema = mongoose.Schema({
     website: String,
     instagram: String,
     address: String,
+    category: Number,
     adminAprroved: false,
     create_date: {
         type: Date,

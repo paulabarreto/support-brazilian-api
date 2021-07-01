@@ -22,9 +22,7 @@ exports.index = function (req, res) {
 exports.new = function (req, res) {
     var business = new Business();
     // business.image.data = fs.readFileSync(req.file);
-    business.image.data = req.file;
-    console.log("🚀 ~ file: brazilianBusinessController.js ~ line 26 ~ req.file", typeof req.file)
-    
+    business.image.data = req.file;    
     business.image.contentType = 'image/png';
     business.name = req.body.name ? req.body.name : business.name;
     business.website = req.body.website;
@@ -55,14 +53,19 @@ exports.view = function (req, res) {
 };
 // Handle update business info
 exports.update = function (req, res) {
-Business.findById(req.params.business_id, function (err, business) {
+    Business.findById(req.params.business_id, function (err, business) {
         if (err)
             res.send(err);
+        business.image = req.file ? {
+            data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        } : business.image;
         business.name = req.body.name ? req.body.name : business.name;
-        business.website = req.body.website;
-        business.instagram = req.body.instagram;
-        business.address = req.body.address;
-// save the business and check for errors
+        business.website = req.body.website ? req.body.website : req.body.website;
+        business.instagram = req.body.instagram ? req.body.instagram : req.body.instagram;
+        business.address = req.body.address ? req.body.address : req.body.address;
+        business.category = req.body.category ? req.body.category : req.body.category;
+        business.adminApproved = req.body.adminApproved ? req.body.adminApproved : req.body.adminApproved;
         business.save(function (err) {
             if (err)
                 res.json(err);

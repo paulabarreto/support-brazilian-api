@@ -19,6 +19,35 @@ const storage = multer.diskStorage({
     limits:{fileSize: 1000000},
  }).single("image");
 
+router.post('/brazilianBusiness/:business_id', function(req, res) {
+    upload(req, res, function (err) {
+        Business.findById(req.params.business_id, function (err, business) {
+            if (err)
+                res.send(err);
+            // business.image = req.file ? {
+            //     data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            //     contentType: 'image/png'
+            // } : business.image;
+            business.name = req.body.name ? req.body.name : business.name;
+            business.website = req.body.website ? req.body.website : req.body.website;
+            business.instagram = req.body.instagram ? req.body.instagram : req.body.instagram;
+            business.address = req.body.address ? req.body.address : req.body.address;
+            business.category = req.body.category ? req.body.category : req.body.category;
+            business.adminApproved = req.body.adminApproved ? req.body.adminApproved : req.body.adminApproved;
+            business.save(function (err) {
+                if (err)
+                    res.json(err);
+                res.json({
+                    message: 'Business Info updated',
+                    data: business
+                });
+            });
+        });
+
+})
+})
+
+
 router.post('/newBusiness', function (req, res) {
     upload(req, res, function (err) {
         var business = new Business();
@@ -56,8 +85,8 @@ const brazilianBusinessController = require('./Controllers/brazilianBusinessCont
 // Contact routes
 router.route('/brazilianBusiness')
     .get(brazilianBusinessController.index)
-    .post(brazilianBusinessController.new);
-router.route('/brazilianBusiness')
+    // .post(brazilianBusinessController.new);
+// router.route('/brazilianBusiness/:business_id')
     // .get(brazilianBusinessController.view)
     // .patch(brazilianBusinessController.update)
     // .put(brazilianBusinessController.update)
