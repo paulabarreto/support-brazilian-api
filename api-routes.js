@@ -29,6 +29,8 @@ router.post('/brazilianBusiness/:business_id', function(req, res) {
                 contentType: 'image/png'
             } : business.image;
             business.name = req.body.name ? req.body.name : business.name;
+            business.description = req.body.description ? req.body.description : business.description;
+            business.location = req.body.location ? req.body.location : business.location;
             business.website = req.body.website ? req.body.website : req.body.website;
             business.instagram = req.body.instagram ? req.body.instagram : req.body.instagram;
             business.address = req.body.address ? req.body.address : req.body.address;
@@ -47,34 +49,16 @@ router.post('/brazilianBusiness/:business_id', function(req, res) {
     })
 })
 
-// router.delete('/brazilianBusiness/:business_id', function(req, res) {
-//     upload(req, res, function (err) {
-//         Business.remove({
-//             _id: req.params.business_id
-//         }, function (err) {
-//             if (err) {
-//                 res.send(err);
-//                 return
-//             }
-//     res.json({
-//                 status: "success",
-//                 message: 'business deleted'
-//             });
-//         });
-
-//     })
-// })
-
-
 router.post('/newBusiness', function (req, res) {
     upload(req, res, function (err) {
         var business = new Business();
-        // business.image.data = fs.readFileSync(req.file);
         business.image = {
             data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
             contentType: 'image/png'
         }
         business.name = req.body.name;
+        business.description = req.body.description;
+        business.location = req.body.location;
         business.website = req.body.website;
         business.instagram = req.body.instagram;
         business.address = req.body.address;

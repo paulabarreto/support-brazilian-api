@@ -9,6 +9,8 @@ var businessSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    description: String,
+    location: String,
     website: String,
     instagram: String,
     address: String,
