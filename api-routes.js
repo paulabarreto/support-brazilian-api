@@ -82,9 +82,16 @@ router.get('/', function (req, res) {
         message: 'Welcome to RESTHub crafted with love!',
     });
 });
+
+const usersController = require('./Controllers/usersController');
+router.route('/users')
+    .get(usersController.index)
+    .delete(usersController.deleteAll); //! danger zone
+router.route('/users/:userEmail')
+    .post(usersController.new)
+
 // Import contact controller
 const brazilianBusinessController = require('./Controllers/brazilianBusinessController');
-// Contact routes
 router.route('/brazilianBusiness')
     .get(brazilianBusinessController.index)
     // .post(brazilianBusinessController.new);
