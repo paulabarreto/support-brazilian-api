@@ -84,11 +84,12 @@ router.get('/', function (req, res) {
 });
 
 const usersController = require('./Controllers/usersController');
+router.route('/users/:userEmail')
+    .get(usersController.getFavourites)
+    .post(usersController.new)
 router.route('/users')
     .get(usersController.index)
     .delete(usersController.deleteAll); //! danger zone
-router.route('/users/:userEmail')
-    .post(usersController.new)
 
 // Import contact controller
 const brazilianBusinessController = require('./Controllers/brazilianBusinessController');

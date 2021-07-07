@@ -16,6 +16,16 @@ exports.index = function (req, res) {
     });
 };
 
+exports.getFavourites = function (req, res) {
+    Users.findOne({email: req.params.userEmail}, function (err, user) {
+        if (err)
+            res.send(err);
+            res.send(
+                user.favourites
+            );
+    });
+}
+
 exports.new = function (req, res) {
     Users.findOne({email: req.params.userEmail}, function (err, user) {
         if (err)
