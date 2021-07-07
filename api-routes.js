@@ -86,6 +86,7 @@ router.get('/', function (req, res) {
 const usersController = require('./Controllers/usersController');
 router.route('/users/:userEmail')
     .get(usersController.getFavourites)
+    .put(usersController.updateFavourites)
     .post(usersController.new)
 router.route('/users')
     .get(usersController.index)

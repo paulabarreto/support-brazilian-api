@@ -26,6 +26,21 @@ exports.getFavourites = function (req, res) {
     });
 }
 
+exports.updateFavourites = function (req, res) {
+    Users.findOne({email: req.params.userEmail}, function (err, user) {
+        if (err)
+            res.send(err);
+        user.favourites = user.favourites.filter(unfavourite => unfavourite !== req.body.unfavourite_id)
+        user.save(function (err) {
+            if (err) {
+                res.json(err);
+                return
+            }
+            res.send('favourite list updated')
+        });
+    });
+}
+
 exports.new = function (req, res) {
     Users.findOne({email: req.params.userEmail}, function (err, user) {
         if (err)
