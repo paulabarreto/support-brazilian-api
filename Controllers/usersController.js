@@ -20,9 +20,13 @@ exports.getFavourites = function (req, res) {
     Users.findOne({email: req.params.userEmail}, function (err, user) {
         if (err)
             res.send(err);
+        if(user) {
             res.send(
                 user.favourites
             );
+        } else {
+            res.send([])
+        }
     });
 }
 
