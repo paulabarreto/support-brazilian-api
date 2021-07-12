@@ -37,12 +37,14 @@ router.post('/brazilianBusiness/:business_id', function(req, res) {
             business.category = req.body.category ? req.body.category : req.body.category;
             business.adminApproved = req.body.adminApproved ? req.body.adminApproved : req.body.adminApproved;
             business.save(function (err) {
-                if (err)
+                if (err) {
                     res.json(err);
-                res.json({
-                    message: 'Business Info updated',
-                    data: business
-                });
+                } else {
+                    res.json({
+                        message: 'Business Info updated',
+                        data: business
+                    });
+                }
             });
         });
 
