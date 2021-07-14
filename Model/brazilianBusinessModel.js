@@ -16,6 +16,7 @@ var businessSchema = mongoose.Schema({
     address: String,
     category: Number,
     adminApproved: Boolean,
+    created_by: String,
     create_date: {
         type: Date,
         default: Date.now

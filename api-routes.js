@@ -66,6 +66,7 @@ router.post('/newBusiness', function (req, res) {
         business.category = req.body.category;
         business.address = req.body.address;
         business.adminApproved = req.body.adminApproved;
+        business.created_by = req.body.createdBy;
         business.save(function (err) {
             if (err) {
                 res.json(err);
