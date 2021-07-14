@@ -31,11 +31,11 @@ router.post('/brazilianBusiness/:business_id', function(req, res) {
             business.name = req.body.name ? req.body.name : business.name;
             business.description = req.body.description ? req.body.description : business.description;
             business.location = req.body.location ? req.body.location : business.location;
-            business.website = req.body.website ? req.body.website : req.body.website;
-            business.instagram = req.body.instagram ? req.body.instagram : req.body.instagram;
-            business.address = req.body.address ? req.body.address : req.body.address;
-            business.category = req.body.category ? req.body.category : req.body.category;
-            business.adminApproved = req.body.adminApproved ? req.body.adminApproved : req.body.adminApproved;
+            business.website = req.body.website ? req.body.website : business.website;
+            business.instagram = req.body.instagram ? req.body.instagram : business.instagram;
+            business.address = req.body.address ? req.body.address : business.address;
+            business.category = req.body.category ? req.body.category : business.category;
+            business.adminApproved = req.body.adminApproved ? req.body.adminApproved : business.adminApproved;
             business.save(function (err) {
                 if (err) {
                     res.json(err);
@@ -63,7 +63,9 @@ router.post('/newBusiness', function (req, res) {
         business.location = req.body.location;
         business.website = req.body.website;
         business.instagram = req.body.instagram;
+        business.category = req.body.category;
         business.address = req.body.address;
+        business.adminApproved = req.body.adminApproved;
         business.save(function (err) {
             if (err) {
                 res.json(err);
