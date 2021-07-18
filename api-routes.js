@@ -21,6 +21,10 @@ const storage = multer.diskStorage({
 
 router.post('/brazilianBusiness/:business_id', function(req, res) {
     upload(req, res, function (err) {
+        if (err) {
+            res.json(err)
+            return
+        }
         Business.findById(req.params.business_id, function (err, business) {
             if (err)
                 res.send(err);
@@ -53,6 +57,10 @@ router.post('/brazilianBusiness/:business_id', function(req, res) {
 
 router.post('/newBusiness', function (req, res) {
     upload(req, res, function (err) {
+        if (err) {
+            res.json(err)
+            return
+        }
         var business = new Business();
         business.image = {
             data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
@@ -77,6 +85,7 @@ router.post('/newBusiness', function (req, res) {
                 data: business
             });
         });
+        
     })
 })
 
@@ -84,7 +93,7 @@ router.post('/newBusiness', function (req, res) {
 router.get('/', function (req, res) {
     res.json({
         status: 'API Its Working',
-        message: 'Welcome to RESTHub crafted with love!',
+        message: 'Welcome to Support Brazilian API!',
     });
 });
 
@@ -95,17 +104,12 @@ router.route('/users/:userEmail')
     .post(usersController.new)
 router.route('/users')
     .get(usersController.index)
-    .delete(usersController.deleteAll); //! danger zone
+    // .delete(usersController.deleteAll); //! danger zone
 
-// Import contact controller
 const brazilianBusinessController = require('./Controllers/brazilianBusinessController');
 router.route('/brazilianBusiness')
     .get(brazilianBusinessController.index)
-    // .post(brazilianBusinessController.new);
 router.route('/brazilianBusiness/:business_id')
-    // .get(brazilianBusinessController.view)
-    // .patch(brazilianBusinessController.update)
-    // .put(brazilianBusinessController.update)
     .delete(brazilianBusinessController.delete);
     // .delete(brazilianBusinessController.deleteAll);
 // Export API routes
