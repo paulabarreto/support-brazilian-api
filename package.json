@@ -1,7 +1,6 @@
 {
   "name": "support-brazilian-api",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "engines": {
     "node": "14.x",
@@ -20,5 +19,17 @@
     "mongoose": "^5.12.15",
     "multer": "^1.4.2",
     "path": "^0.12.7"
-  }
+  },
+  "devDependencies": {
+    "webpack": "^5.45.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulabarreto/support-brazilian-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/paulabarreto/support-brazilian-api/issues"
+  },
+  "homepage": "https://github.com/paulabarreto/support-brazilian-api#readme",
+  "description": ""
 }
