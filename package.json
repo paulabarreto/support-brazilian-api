@@ -8,6 +8,8 @@
   },
   "scripts": {
     "start": "nodemon ./src/index.js",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -22,7 +24,8 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "webpack": "^5.45.1"
+    "webpack": "^5.45.1",
+    "webpack-cli": "^4.7.2"
   },
   "repository": {
     "type": "git",
