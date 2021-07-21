@@ -2,7 +2,7 @@ var fs = require('fs');
 
 // Initialize express router
 let router = require('express').Router();
-Business = require('../Model/brazilianBusinessModel');
+Business = require('./Model/brazilianBusinessModel');
 
 const path = require("path");
 const multer = require("multer");
@@ -97,7 +97,7 @@ router.get('/', function (req, res) {
     });
 });
 
-const usersController = require('../Controllers/usersController');
+const usersController = require('./Controllers/usersController');
 router.route('/users/:userEmail')
     .get(usersController.getFavourites)
     .put(usersController.updateFavourites)
@@ -106,7 +106,7 @@ router.route('/users')
     .get(usersController.index)
     // .delete(usersController.deleteAll); //! danger zone
 
-const brazilianBusinessController = require('../Controllers/brazilianBusinessController');
+const brazilianBusinessController = require('./Controllers/brazilianBusinessController');
 router.route('/brazilianBusiness')
     .get(brazilianBusinessController.index)
 router.route('/brazilianBusiness/:business_id')
