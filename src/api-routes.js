@@ -105,6 +105,8 @@ router.route('/users/:userEmail')
 router.route('/users')
     .get(usersController.index)
     // .delete(usersController.deleteAll); //! danger zone
+router.route('/favourites')
+    .get(usersController.getTopFavourites)
 
 const brazilianBusinessController = require('./Controllers/brazilianBusinessController');
 router.route('/brazilianBusiness')
