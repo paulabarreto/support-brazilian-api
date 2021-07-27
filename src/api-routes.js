@@ -112,6 +112,7 @@ const brazilianBusinessController = require('./Controllers/brazilianBusinessCont
 router.route('/brazilianBusiness')
     .get(brazilianBusinessController.index)
 router.route('/brazilianBusiness/:business_id')
+    .put(brazilianBusinessController.likeBusiness)
     .delete(brazilianBusinessController.delete);
     // .delete(brazilianBusinessController.deleteAll);
 // Export API routes

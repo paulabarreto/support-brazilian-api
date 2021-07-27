@@ -115,7 +115,7 @@ exports.deleteAll = function (req, res) {
             res.send(err);
             return
         }
-res.json({
+        res.json({
             status: "success",
             message: 'users deleted'
         });

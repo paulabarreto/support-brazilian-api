@@ -15,6 +15,7 @@ var businessSchema = mongoose.Schema({
     instagram: String,
     address: String,
     category: Number,
+    likes: Number,
     adminApproved: Boolean,
     created_by: String,
     create_date: {

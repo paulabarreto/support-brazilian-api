@@ -19,6 +19,32 @@ exports.index = function (req, res) {
     });
 };
 
+exports.likeBusiness = function(req, res) {
+    Business.findById({_id: req.params.business_id}, function (err, business) {
+        if (err)
+            res.send(err);
+        if(business) {
+            if(business.likes) {
+                business.likes = req.body.like ?
+                                    business.likes + 1 :
+                                    business.likes -1;
+            } else {
+                business.likes = 1
+            }
+            business.save(function (err) {
+                if (err) {
+                    res.json(err);
+                    return
+                }
+            res.json({
+                    message: 'businessUpdated!',
+                    data: business
+                });
+            });
+        }
+    })
+}
+
 // Handle delete contact
 exports.delete = function (req, res) {
     Business.remove({
