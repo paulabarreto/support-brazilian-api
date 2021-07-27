@@ -72,6 +72,7 @@ router.post('/newBusiness', function (req, res) {
         business.website = req.body.website;
         business.instagram = req.body.instagram;
         business.category = req.body.category;
+        business.likes = 0;
         business.address = req.body.address;
         business.adminApproved = req.body.adminApproved;
         business.created_by = req.body.createdBy;
