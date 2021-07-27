@@ -108,7 +108,7 @@ router.route('/users')
     // .delete(usersController.deleteAll); //! danger zone
 
 const brazilianBusinessController = require('./Controllers/brazilianBusinessController');
-router.route('/brazilianBusiness')
+router.route('/brazilianBusiness/:page')
     .get(brazilianBusinessController.index)
 router.route('/brazilianBusiness/:business_id')
     .put(brazilianBusinessController.likeBusiness)

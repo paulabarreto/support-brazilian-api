@@ -4,7 +4,8 @@ var fs = require('fs');
 Business = require('../Model/brazilianBusinessModel');
 // Handle index actions
 exports.index = function (req, res) {
-    Business.find({}).sort('-likes').limit(5).exec(function(err, docs) {
+    const skip = (req.params.page - 1) * 5;
+    Business.find({}).sort('-likes').limit(5).skip(skip).exec(function(err, docs) {
         if (err) {
             res.json({
                 status: "error",
