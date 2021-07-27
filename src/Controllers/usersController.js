@@ -30,35 +30,6 @@ exports.getFavourites = function (req, res) {
     });
 }
 
-exports.getTopFavourites = function (req, res) {
-    Users.get(function (err, users) {
-        if (err)
-            res.send(err);
-        if(users) {
-            let allFavourites = [];
-            users.map(user => {
-                user.favourites.map(favourite => {
-                    allFavourites.push(favourite)
-                })
-            })
-            function mode(arr){
-                return arr.sort((a,b) =>
-                    arr.filter(v => v===b).length
-                    - arr.filter(v => v===a).length
-                );
-            }
-            let uniq = a => [...new Set(a)];
-            allFavourites = mode(allFavourites);
-            allFavourites = uniq(allFavourites);
-            res.send(
-                allFavourites
-            );
-        } else {
-            res.send([])
-        }
-    });
-}
-
 exports.updateFavourites = function (req, res) {
     Users.findOne({email: req.params.userEmail}, function (err, user) {
         if (err)

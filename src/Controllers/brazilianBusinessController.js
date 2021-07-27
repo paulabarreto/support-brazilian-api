@@ -4,7 +4,7 @@ var fs = require('fs');
 Business = require('../Model/brazilianBusinessModel');
 // Handle index actions
 exports.index = function (req, res) {
-    Business.get(function (err, contacts) {
+    Business.find({}).sort('likes').limit(5).exec(function(err, docs) {
         if (err) {
             res.json({
                 status: "error",
@@ -14,7 +14,7 @@ exports.index = function (req, res) {
         res.json({
             status: "success",
             message: "Business retrieved successfully",
-            data: contacts
+            data: docs
         });
     });
 };
