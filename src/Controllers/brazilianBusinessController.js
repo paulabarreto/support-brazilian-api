@@ -37,6 +37,25 @@ exports.findByCategory = function (req, res) {
     });
 };
 
+exports.findByName = function (req, res) {
+    const skip = (req.params.page - 1) * 5;
+    const value = req.params.name;
+    let query = {name: { $regex: '.*' + value + '.*', $options: 'i' }};
+    Business.find(query).limit(5).skip(skip).exec(function(err, docs) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+        }
+        res.json({
+            status: "success",
+            message: "Business retrieved successfully",
+            data: docs
+        });
+    });
+};
+
 exports.likeBusiness = function(req, res) {
     Business.findById({_id: req.params.business_id}, function (err, business) {
         if (err)
