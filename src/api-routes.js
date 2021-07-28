@@ -110,6 +110,8 @@ router.route('/users')
 const brazilianBusinessController = require('./Controllers/brazilianBusinessController');
 router.route('/brazilianBusiness/:page')
     .get(brazilianBusinessController.index)
+router.route('/brazilianBusiness/:page/:category')
+    .get(brazilianBusinessController.findByCategory)
 router.route('/brazilianBusiness/:business_id')
     .put(brazilianBusinessController.likeBusiness)
     .delete(brazilianBusinessController.delete);

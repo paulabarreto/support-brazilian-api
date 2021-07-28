@@ -20,6 +20,23 @@ exports.index = function (req, res) {
     });
 };
 
+exports.findByCategory = function (req, res) {
+    const skip = (req.params.page - 1) * 5;
+    Business.find({category: req.params.category }).limit(5).skip(skip).exec(function(err, docs) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+        }
+        res.json({
+            status: "success",
+            message: "Business retrieved successfully",
+            data: docs
+        });
+    });
+};
+
 exports.likeBusiness = function(req, res) {
     Business.findById({_id: req.params.business_id}, function (err, business) {
         if (err)
