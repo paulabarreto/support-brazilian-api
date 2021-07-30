@@ -20,6 +20,22 @@ exports.index = function (req, res) {
     });
 };
 
+exports.findFavourites = function (req, res) {
+    Business.find({'_id': {$in: req.query.ids}}).sort('-likes').exec(function(err, docs) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+        }
+        res.json({
+            status: "success",
+            message: "Business retrieved successfully",
+            data: docs
+        });
+    });
+};
+
 exports.getBusinessAmount = function (req, res) {
     Business.count({}).exec(function(err, docs) {
         if (err) {

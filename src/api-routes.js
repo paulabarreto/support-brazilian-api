@@ -110,6 +110,8 @@ router.route('/users')
 const brazilianBusinessController = require('./Controllers/brazilianBusinessController');
 router.route('/brazilianBusinessCount')
     .get(brazilianBusinessController.getBusinessAmount)
+router.route('/brazilianBusinessFavourites')
+    .get(brazilianBusinessController.findFavourites)
 router.route('/brazilianBusiness/:page')
     .get(brazilianBusinessController.index)
 router.route('/brazilianBusiness/:page/:category')
