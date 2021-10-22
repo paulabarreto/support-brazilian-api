@@ -37,19 +37,37 @@ exports.findFavourites = function (req, res) {
 };
 
 exports.getBusinessAmount = function (req, res) {
-    Business.count({[req.params.filterBy]: req.params.value}).exec(function(err, docs) {
-        if (err) {
+    const value = req.params.value === '0' ? '' : req.params.value;
+    console.log("🚀 ~ file: brazilianBusinessController.js ~ line 41 ~ value", value)
+    if(!value) {
+        Business.count({}).exec(function(err, docs) {
+            if (err) {
+                res.json({
+                    status: "error",
+                    message: err,
+                });
+            }
             res.json({
-                status: "error",
-                message: err,
+                status: "success",
+                message: "Number of Business retrieved successfully",
+                data: docs
             });
-        }
-        res.json({
-            status: "success",
-            message: "Number of Business retrieved successfully",
-            data: docs
         });
-    });
+    } else {
+        Business.count({[req.params.filterBy]: value}).exec(function(err, docs) {
+            if (err) {
+                res.json({
+                    status: "error",
+                    message: err,
+                });
+            }
+            res.json({
+                status: "success",
+                message: "Number of Business retrieved successfully",
+                data: docs
+            });
+        });
+    }
 };
 
 exports.findByCategory = function (req, res) {
