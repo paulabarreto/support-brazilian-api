@@ -38,7 +38,6 @@ exports.findFavourites = function (req, res) {
 
 exports.getBusinessAmount = function (req, res) {
     const value = req.params.value === '0' ? '' : req.params.value;
-    console.log("🚀 ~ file: brazilianBusinessController.js ~ line 41 ~ value", value)
     if(!value) {
         Business.count({}).exec(function(err, docs) {
             if (err) {
