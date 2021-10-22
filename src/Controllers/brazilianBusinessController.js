@@ -37,7 +37,7 @@ exports.findFavourites = function (req, res) {
 };
 
 exports.getBusinessAmount = function (req, res) {
-    Business.count({}).exec(function(err, docs) {
+    Business.count({[req.params.filterBy]: req.params.value}).exec(function(err, docs) {
         if (err) {
             res.json({
                 status: "error",
