@@ -11,6 +11,8 @@ var businessSchema = mongoose.Schema({
     },
     description: String,
     location: String,
+    lat: Number,
+    lng: Number,
     website: String,
     instagram: String,
     address: String,

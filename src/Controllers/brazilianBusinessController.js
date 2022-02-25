@@ -39,12 +39,13 @@ exports.findFavourites = function (req, res) {
 exports.getBusinessAmount = function (req, res) {
     const value = req.params.value === '0' ? '' : req.params.value;
     if(!value) {
-        Business.count({}).exec(function(err, docs) {
+        Business.countDocuments({}).exec(function(err, docs) {
             if (err) {
                 res.json({
                     status: "error",
                     message: err,
                 });
+                return
             }
             res.json({
                 status: "success",
@@ -53,7 +54,7 @@ exports.getBusinessAmount = function (req, res) {
             });
         });
     } else {
-        Business.count({[req.params.filterBy]: value}).exec(function(err, docs) {
+        Business.countDocuments({[req.params.filterBy]: value}).exec(function(err, docs) {
             if (err) {
                 res.json({
                     status: "error",
