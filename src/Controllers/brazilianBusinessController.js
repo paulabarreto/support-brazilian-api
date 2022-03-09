@@ -87,6 +87,22 @@ exports.findByCategory = function (req, res) {
     });
 };
 
+exports.findCoordinates = function (req, res) {
+    Business.find({}, ['lat', 'lng'],).exec(function(err, docs) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+        }
+        res.json({
+            status: "success",
+            message: "Coordinates retrieved successfully",
+            data: docs
+        });
+    });
+}
+
 exports.findByName = function (req, res) {
     const skip = (req.params.page - 1) * 5;
     const value = req.params.name;

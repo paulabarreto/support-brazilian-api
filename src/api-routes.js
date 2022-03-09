@@ -102,6 +102,7 @@ router.get('/', function (req, res) {
     });
 });
 
+
 const usersController = require('./Controllers/usersController');
 router.route('/users/:userEmail')
     .get(usersController.getFavourites)
@@ -112,6 +113,8 @@ router.route('/users')
     // .delete(usersController.deleteAll); //! danger zone
 
 const brazilianBusinessController = require('./Controllers/brazilianBusinessController');
+router.route('/findMarkers')
+    .get(brazilianBusinessController.findCoordinates)
 router.route('/brazilianBusinessCount/:filterBy/:value')
     .get(brazilianBusinessController.getBusinessAmount)
 router.route('/brazilianBusinessFavourites')
