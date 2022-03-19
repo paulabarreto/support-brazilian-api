@@ -1,4 +1,6 @@
 var fs = require('fs');
+const checkUrl = require('./Services/checkUrl');
+
 
 // Initialize express router
 let router = require('express').Router();
@@ -20,6 +22,7 @@ const storage = multer.diskStorage({
  }).single("image");
 
 router.post('/brazilianBusiness/:business_id', function(req, res) {
+    
     upload(req, res, function (err) {
         if (err) {
             res.json(err)
@@ -32,12 +35,18 @@ router.post('/brazilianBusiness/:business_id', function(req, res) {
                 data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
                 contentType: 'image/png'
             } : business.image;
+            
+            // Add https to site
+            let validatedWebsite;
+            if(req.body.website) {
+                validatedWebsite = checkUrl.validateURL(req.body.website)
+            }
             business.name = req.body.name ? req.body.name : business.name;
             business.description = req.body.description ? req.body.description : business.description;
             business.location = req.body.location ? req.body.location : business.location;
             business.lat = req.body.lat ? req.body.lat : business.lat;
             business.lng = req.body.lng ? req.body.lng : business.lng;
-            business.website = req.body.website ? req.body.website : business.website;
+            business.website = req.body.website ? validatedWebsite : business.website;
             business.instagram = req.body.instagram ? req.body.instagram : business.instagram;
             business.address = req.body.address ? req.body.address : business.address;
             business.category = req.body.category ? req.body.category : business.category;
@@ -68,12 +77,19 @@ router.post('/newBusiness', function (req, res) {
             data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
             contentType: 'image/png'
         }
+
+        // Add https to site
+        let validatedWebsite;
+        if(req.body.website) {
+            validatedWebsite = checkUrl.validateURL(req.body.website)
+        }
+
         business.name = req.body.name;
         business.description = req.body.description;
         business.location = req.body.location;
         business.lat = req.body.lat;
         business.lng = req.body.lng;
-        business.website = req.body.website;
+        business.website = validatedWebsite;
         business.instagram = req.body.instagram;
         business.category = req.body.category;
         business.likes = 0;
