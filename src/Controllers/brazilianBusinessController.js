@@ -5,8 +5,8 @@ Business = require('../Model/brazilianBusinessModel');
 // Handle index actions
 exports.index = function (req, res) {
     const pageNumber = req.params.page
-    const skip = (req.params.page - 1) * 6;
-    Business.find({}).limit(6).skip(skip).exec(function(err, docs) {
+    const skip = (pageNumber - 1) * 6;
+    Business.find({}).sort({adminApproved: 'asc'}).limit(6).skip(skip).exec(function(err, docs) {
         if (err) {
             res.json({
                 status: "error",
