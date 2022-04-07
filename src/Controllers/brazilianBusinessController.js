@@ -6,7 +6,7 @@ Business = require('../Model/brazilianBusinessModel');
 exports.index = function (req, res) {
     const pageNumber = req.params.page
     const skip = (pageNumber - 1) * 6;
-    Business.find({}).sort({adminApproved: 'asc'}).limit(6).skip(skip).exec(function(err, docs) {
+    Business.find({}).limit(6).skip(skip).exec(function(err, docs) {
         if (err) {
             res.json({
                 status: "error",
@@ -20,6 +20,22 @@ exports.index = function (req, res) {
         });
     });
 };
+
+exports.adminRequests = function (req, res) {
+    Business.find({adminApproved: false}).exec(function(err, docs){
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+        }
+        res.json({
+            status: "success",
+            message: "Business retrieved successfully",
+            data: docs
+        });
+    })
+}
 
 exports.findFavourites = function (req, res) {
     Business.find({'_id': {$in: req.query.ids}}).sort('-likes').exec(function(err, docs) {
