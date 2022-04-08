@@ -19,6 +19,9 @@ var businessSchema = mongoose.Schema({
     category: Number,
     likes: Number,
     adminApproved: Boolean,
+    deletionRequested: Boolean,
+    deletionRequestedBy: String,
+    editionRequestedBy: String,
     created_by: String,
     create_date: {
         type: Date,

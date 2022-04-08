@@ -22,7 +22,11 @@ exports.index = function (req, res) {
 };
 
 exports.adminRequests = function (req, res) {
-    Business.find({adminApproved: false}).exec(function(err, docs){
+    Business.find()
+    .and([
+        { $or: [{adminApproved: false}, {deletionRequested: true}] }
+    ]
+    ).exec(function(err, docs){
         if (err) {
             res.json({
                 status: "error",
