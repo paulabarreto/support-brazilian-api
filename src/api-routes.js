@@ -51,8 +51,8 @@ router.post('/brazilianBusiness/:business_id', function(req, res) {
             business.address = req.body.address ? req.body.address : business.address;
             business.category = req.body.category ? req.body.category : business.category;
             business.adminApproved = req.body.adminApproved ? req.body.adminApproved : business.adminApproved;
-            business.editionRequestedBy = req.body.email ? req.body.email : '';
-            business.deletionRequestedBy = req.body.email ? req.body.email : '';
+            business.editionRequestedBy = req.body.editionRequestedBy ? req.body.editionRequestedBy : '';
+            business.deletionRequestedBy = req.body.deletionRequestedBy ? req.body.deletionRequestedBy : '';
             business.deletionRequested = req.body.deletionRequested ? req.body.deletionRequested : false;
             business.save(function (err) {
                 if (err) {
