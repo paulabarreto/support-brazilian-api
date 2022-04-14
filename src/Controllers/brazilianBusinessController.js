@@ -109,7 +109,7 @@ exports.findByCategory = function (req, res) {
 };
 
 exports.findCoordinates = function (req, res) {
-    Business.find({}, ['name', 'website', 'instagram', 'lat', 'lng'],).exec(function(err, docs) {
+    Business.find({}, ['name', 'website', 'instagram', 'adminApproved', 'location', 'lat', 'lng'],).exec(function(err, docs) {
         if (err) {
             res.json({
                 status: "error",
