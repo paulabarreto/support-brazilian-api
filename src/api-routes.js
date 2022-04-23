@@ -146,6 +146,8 @@ router.route('/brazilianBusiness/:page/:category')
     .get(brazilianBusinessController.findByCategory)
 router.route('/brazilianBusiness/:page/:category/:name')
     .get(brazilianBusinessController.findByName)
+router.route('/locationSearch/:page/:location')
+    .get(brazilianBusinessController.findByLocation)
 router.route('/brazilianBusiness/:business_id')
     .put(brazilianBusinessController.likeBusiness)
     .delete(brazilianBusinessController.delete);

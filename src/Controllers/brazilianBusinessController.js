@@ -124,6 +124,26 @@ exports.findCoordinates = function (req, res) {
     });
 }
 
+exports.findByLocation = function (req, res) {
+    const skip = (req.params.page - 1) * 5;
+    const value = req.params.location;
+    let query = {location: { $regex: '.*' + value + '.*', $options: 'i' }, adminApproved: true};
+    
+    Business.find(query).limit(5).skip(skip).exec(function(err, docs) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+        }
+        res.json({
+            status: "success",
+            message: "Business retrieved successfully",
+            data: docs
+        });
+    });
+}
+
 exports.findByName = function (req, res) {
     const skip = (req.params.page - 1) * 5;
     const value = req.params.name;
