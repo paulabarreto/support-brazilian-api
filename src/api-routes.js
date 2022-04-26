@@ -76,10 +76,10 @@ router.post('/newBusiness', function (req, res) {
             return
         }
         var business = new Business();
-        business.image = {
+        business.image = req.file ? {
             data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
             contentType: 'image/png'
-        }
+        } : null;
 
         // Add https to site
         let validatedWebsite;
