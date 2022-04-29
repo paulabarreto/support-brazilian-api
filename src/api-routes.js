@@ -1,10 +1,9 @@
 var fs = require('fs');
 const checkUrl = require('./Services/checkUrl');
 
-
-// Initialize express router
 let router = require('express').Router();
 Business = require('./Model/brazilianBusinessModel');
+
 
 const path = require("path");
 const multer = require("multer");
@@ -132,6 +131,12 @@ router.route('/users')
     // .delete(usersController.deleteAll); //! danger zone
 
 const brazilianBusinessController = require('./Controllers/brazilianBusinessController');
+
+const mailer = require('./Services/nodeMailer');
+router.route('/mailer')
+    .get(mailer.verifyNodeMailer)
+router.route('/mailer/sendEmail')
+    .get(mailer.sendMail)
 router.route('/findMarkers')
     .get(brazilianBusinessController.findCoordinates)
 router.route('/brazilianBusinessCount/:filterBy/:value')
