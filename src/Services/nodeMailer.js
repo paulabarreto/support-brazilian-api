@@ -23,13 +23,11 @@ const transporter = nodemailer.createTransport({
   }
 
   exports.sendMail = function(req, res, err) {
-    var name = req.body.name
     var email = process.env.RECIPIENT_EMAIL
     var subject = req.body.subject
     var message = req.body.message
   
     var mail = {
-      from: name,
       to: email,
       subject: subject,
       text: message
