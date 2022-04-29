@@ -136,7 +136,7 @@ const mailer = require('./Services/nodeMailer');
 router.route('/mailer')
     .get(mailer.verifyNodeMailer)
 router.route('/mailer/sendEmail')
-    .get(mailer.sendMail)
+    .post(mailer.sendMail)
 router.route('/findMarkers')
     .get(brazilianBusinessController.findCoordinates)
 router.route('/brazilianBusinessCount/:filterBy/:value')
