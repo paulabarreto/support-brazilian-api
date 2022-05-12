@@ -21,6 +21,22 @@ exports.index = function (req, res) {
     });
 };
 
+exports.businessList = function (req, res) {
+    Business.find({}).exec(function(err, docs) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+        }
+        res.json({
+            status: "success",
+            message: "Business retrieved successfully",
+            data: docs
+        });
+    });
+};
+
 exports.adminRequests = function (req, res) {
     Business.find()
     .and([
