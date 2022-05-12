@@ -22,7 +22,7 @@ exports.index = function (req, res) {
 };
 
 exports.businessList = function (req, res) {
-    Business.find({}).exec(function(err, docs) {
+    Business.find({adminApproved: true}).exec(function(err, docs) {
         if (err) {
             res.json({
                 status: "error",
