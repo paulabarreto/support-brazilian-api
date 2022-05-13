@@ -4,9 +4,7 @@ var fs = require('fs');
 Business = require('../Model/brazilianBusinessModel');
 // Handle index actions
 exports.index = function (req, res) {
-    const pageNumber = req.params.page
-    const skip = (pageNumber - 1) * 12;
-    Business.find({}).limit(12).skip(skip).exec(function(err, docs) {
+    Business.find({adminApproved: true}).exec(function(err, docs) {
         if (err) {
             res.json({
                 status: "error",
@@ -108,8 +106,7 @@ exports.getBusinessAmount = function (req, res) {
 };
 
 exports.findByCategory = function (req, res) {
-    const skip = (req.params.page - 1) * 12;
-    Business.find({category: req.params.category }).limit(12).skip(skip).exec(function(err, docs) {
+    Business.find({category: req.params.category }).exec(function(err, docs) {
         if (err) {
             res.json({
                 status: "error",
