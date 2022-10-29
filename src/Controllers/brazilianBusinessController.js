@@ -106,6 +106,7 @@ exports.getBusinessAmount = function (req, res) {
 };
 
 exports.findByCategory = function (req, res) {
+
     Business.find({category: req.params.category }).exec(function(err, docs) {
         if (err) {
             res.json({
@@ -158,10 +159,9 @@ exports.findByLocation = function (req, res) {
 }
 
 exports.findByName = function (req, res) {
-    const skip = (req.params.page - 1) * 12;
     const value = req.params.name;
     let query = {name: { $regex: '.*' + value + '.*', $options: 'i' }};
-    Business.find(query).limit(12).skip(skip).exec(function(err, docs) {
+    Business.find(query).exec(function(err, docs) {
         if (err) {
             res.json({
                 status: "error",
