@@ -35,7 +35,7 @@ router.post('/brazilianBusiness/:business_id', function(req, res) {
                 contentType: 'image/png'
             } : business.image;
             
-            // Add https to site
+            // Add https cert to site
             let validatedWebsite;
             if(req.body.website) {
                 validatedWebsite = checkUrl.validateURL(req.body.website)
