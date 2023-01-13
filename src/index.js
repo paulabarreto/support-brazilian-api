@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 mongoose.connect(process.env.MONGO,
-    { useNewUrlParser: true}
+    { useNewUrlParser: true, useUnifiedTopology: true }
 );
 var db = mongoose.connection;
 
